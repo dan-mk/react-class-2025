@@ -93,6 +93,10 @@ function renderTask(task) {
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("small-button", "danger");
   deleteButton.textContent = "Excluir";
+  deleteButton.addEventListener("click", () => {
+    state.tasks = state.tasks.filter((t) => t.id !== task.id);
+    render();
+  });
 
   taskActionsDiv.appendChild(deleteButton);
   taskItem.appendChild(taskTitleSpan);
