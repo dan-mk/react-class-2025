@@ -34,6 +34,9 @@ taskForm.addEventListener("submit", (event) => {
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("small-button", "danger");
   deleteButton.textContent = "Excluir";
+  deleteButton.addEventListener("click", () => {
+    taskList.removeChild(taskItem);
+  });
 
   taskItem.appendChild(taskTitleSpan);
   taskItem.appendChild(taskActionsDiv);
