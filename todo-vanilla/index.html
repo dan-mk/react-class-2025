@@ -9,22 +9,10 @@
     <div id="app">
       <h1>Lista de tarefas</h1>
       <form id="task-form">
-        <input id="task-input" type="text" placeholder="Descrição da tarefa" />
+        <input id="task-input" type="text" placeholder="Descrição da tarefa" autocomplete="off" autofocus />
         <button class="button" type="submit">Adicionar</button>
       </form>
-      <ul id="task-list">
-        <li class="task">
-          <span class="task-title">Tarefa 1</span>
-          <div class="task-actions">
-            <button class="small-button">Marcar como concluída</button>
-            <button class="small-button danger">Excluir</button>
-        </li>
-        <li class="task completed">
-          <span class="task-title">Tarefa 2</span>
-          <div class="task-actions">
-            <button class="small-button danger">Excluir</button>
-        </li>
-      </ul>
+      <ul id="task-list"></ul>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>
