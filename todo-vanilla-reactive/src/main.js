@@ -19,6 +19,29 @@ const state = {
 function renderForm() {
   const taskForm = document.createElement("form");
   taskForm.id = "task-form";
+  taskForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const taskTitle = state.newTask.trim();
+    if (taskTitle === "") {
+      alert("Por favor, insira a descrição da tarefa.");
+      return;
+    }
+
+    let newId = 1;
+    if (state.tasks.length > 0) {
+      newId = state.tasks.at(-1).id + 1;
+    }
+
+    state.newTask = "";
+    state.tasks.push({
+      id: newId,
+      title: taskTitle,
+      completed: false,
+    });
+
+    render();
+  });
 
   const taskInput = document.createElement("input");
   taskInput.id = "task-input";
