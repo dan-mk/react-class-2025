@@ -83,6 +83,10 @@ function renderTask(task) {
     const completeButton = document.createElement("button");
     completeButton.classList.add("small-button");
     completeButton.textContent = "Marcar como concluída";
+    completeButton.addEventListener("click", () => {
+      task.completed = true;
+      render();
+    });
     taskActionsDiv.appendChild(completeButton);
   }
 
