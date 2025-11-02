@@ -16,6 +16,16 @@ const state = {
   ],
 };
 
+function setNewTask(newTask) {
+  state.newTask = newTask;
+  render();
+}
+
+function setTasks(tasks) {
+  state.tasks = tasks;
+  render();
+}
+
 function renderForm() {
   const taskForm = document.createElement("form");
   taskForm.id = "task-form";
@@ -33,14 +43,15 @@ function renderForm() {
       newId = state.tasks.at(-1).id + 1;
     }
 
-    state.newTask = "";
-    state.tasks.push({
-      id: newId,
-      title: taskTitle,
-      completed: false,
-    });
-
-    render();
+    setNewTask("");
+    setTasks([
+      ...state.tasks,
+      {
+        id: newId,
+        title: taskTitle,
+        completed: false,
+      },
+    ]);
   });
 
   const taskInput = document.createElement("input");
@@ -51,7 +62,7 @@ function renderForm() {
   taskInput.autofocus = true;
   taskInput.value = state.newTask;
   taskInput.addEventListener("input", (event) => {
-    state.newTask = event.target.value;
+    setNewTask(event.target.value);
   });
 
   const submitButton = document.createElement("button");
@@ -84,8 +95,14 @@ function renderTask(task) {
     completeButton.classList.add("small-button");
     completeButton.textContent = "Marcar como concluída";
     completeButton.addEventListener("click", () => {
-      task.completed = true;
-      render();
+      setTasks(
+        state.tasks.map((t) => {
+          if (t.id === task.id) {
+            return { ...t, completed: true };
+          }
+          return t;
+        })
+      );
     });
     taskActionsDiv.appendChild(completeButton);
   }
@@ -94,8 +111,7 @@ function renderTask(task) {
   deleteButton.classList.add("small-button", "danger");
   deleteButton.textContent = "Excluir";
   deleteButton.addEventListener("click", () => {
-    state.tasks = state.tasks.filter((t) => t.id !== task.id);
-    render();
+    setTasks(state.tasks.filter((t) => t.id !== task.id));
   });
 
   taskActionsDiv.appendChild(deleteButton);
