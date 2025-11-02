@@ -26,6 +26,10 @@ taskForm.addEventListener("submit", (event) => {
   const completeButton = document.createElement("button");
   completeButton.classList.add("small-button");
   completeButton.textContent = "Marcar como concluída";
+  completeButton.addEventListener("click", () => {
+    taskItem.classList.add("completed");
+    completeButton.remove();
+  });
 
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("small-button", "danger");
