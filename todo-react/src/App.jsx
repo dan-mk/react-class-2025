@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TaskForm } from "./TaskForm";
+import { TaskItem } from "./TaskItem";
 
 export function App() {
   const [tasks, setTasks] = useState([]);
@@ -32,28 +33,12 @@ export function App() {
       <TaskForm onAddTask={handleAddTask} />
       <ul id="task-list">
         {tasks.map((task) => (
-          <li
+          <TaskItem
             key={task.id}
-            className={`task${task.completed ? " completed" : ""}`}
-          >
-            <span className="task-title">{task.title}</span>
-            <div className="task-actions">
-              {!task.completed && (
-                <button
-                  className="small-button"
-                  onClick={() => handleComplete(task.id)}
-                >
-                  Marcar como concluída
-                </button>
-              )}
-              <button
-                className="small-button danger"
-                onClick={() => handleDelete(task.id)}
-              >
-                Excluir
-              </button>
-            </div>
-          </li>
+            task={task}
+            onComplete={handleComplete}
+            onDelete={handleDelete}
+          />
         ))}
       </ul>
     </div>
